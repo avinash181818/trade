@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quickprop Trader - Buy/Sell</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: left;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: Green;
+            color: #fff;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+	.button2 {background-color: #008CBA;} /* Blue */
+	.button3 {background-color: #f44336;} /* Red */
+	.button4 {background-color: #e7e7e7; color: black;} /* Gray */
+	.button5 {background-color: #555555;} /* Black */
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+  <center>
+    <h1>Welcome to Quickprop Trader</h1>
+    <div>
+        <h2>Buy Stocks</h2>
+        <label for="stockSymbol">Stock Symbol:</label>
+	<select name="cars" id="stockSymbolBuy">
+		  <option value="NIFTY">Nifty</option>
+		  <option value="SUNPHARMA">Sunpharma</option>
+		  <option value="TCS">TCS</option>
+		  <option value="WIPRO">Wipro</option>
+	</select>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" value="10" placeholder="Enter quantity">
+        <button id="buyButton">Buy</button>
+    </div>
+    <div>
+        <h2>Sell Stocks</h2>
+        <label for="stockSymbolSell">Stock Symbol:</label>
+        <select name="Stock" id="stockSymbolSell">
+                  <option value="NIFTY">Nifty</option>
+                  <option value="SUNPHARMA">Sunpharma</option>
+                  <option value="TCS">TCS</option>
+                  <option value="WIPRO">Wipro</option>
+        </select>
+        <label for="quantitySell">Quantity:</label>
+        <input type="number" id="quantitySell" value="10" placeholder="Enter quantity">
+        <button class="button button3" id="sellButton">Sell</button>
+    </div>
+    <button class="button button5" id="buyButton">Reset</button>
+    <button class="button button4" id="sellButton">Home</button>
+
+
+<script src="https://your-zerodha-connect-library-link.js"></script>
+<script>
+    // Replace these values with your actual API credentials
+    const apiKey = 'b7gsr62trc3vytqj';
+    const accessToken = 'skbanmhhpyhw5oba6reu5gr3mrq5j7x8';
+
+    // Function to place a market buy order
+    function placeMarketBuyOrder() {
+        const orderParams = {
+            exchange: 'NSE', // Replace with the desired exchange
+            tradingsymbol: 'AAPL', // Replace with the desired stock symbol
+            quantity: 1, // Replace with the desired quantity
+            transaction_type: 'BUY',
+            order_type: 'MARKET'
+        };
+
+        // Call Zerodha Connect API to place the order
+        // Refer to the documentation for the exact method and parameters
+        ZerodhaConnect.placeOrder(apiKey, accessToken, orderParams)
+            .then(response => {
+                console.log('Order placed successfully:', response);
+            })
+            .catch(error => {
+                console.error('Error placing order:', error);
+            });
+    }
+
+    // Attach click event handlers to the buttons
+    document.getElementById('buyButton').addEventListener('click', placeMarketBuyOrder);
+
+    </script>
+  </center>
+   <div class="field">
+                 <p class="control">
+                   <button >
+                     <a href="{{url_for('logout')}}">Logout</a>
+                   </button>
+                 </p>
+               </div>
+</body>
+</html>
